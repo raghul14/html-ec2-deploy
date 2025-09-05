@@ -20,7 +20,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           source: "./*"
-          target: "/home/${{ secrets.EC2_USER }}/app"
+          target: "/home/${{ secrets.EC2_USER }}/html-ec2-deploy/html-ec2-deploy"
 
       - name: Restart Web Server
         uses: appleboy/ssh-action@v1.0.3
@@ -31,5 +31,5 @@ jobs:
           script: |
             sudo apt update
             sudo apt install -y nginx
-            sudo cp /home/${{ secrets.EC2_USER }}/app/index.html /var/www/html/index.html
+            sudo cp /home/${{ secrets.EC2_USER }}/html-ec2-deploy/html-ec2-deploy/index.html /var/www/html/index.html
             sudo systemctl restart nginx
